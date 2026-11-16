@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mahmoud Hussien Marof — Front-End Developer</title>
+<meta name="description" content="Mahmoud Hussien Marof — Front-End & WordPress Developer. React.js, WordPress, Shopify.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Mahmoud Hussien Marof — Front-End Developer">
+<meta property="og:image" content="assets/me.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Cairo:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04050b; --bg2:#0a0c18; --line:rgba(160,180,255,.14); --line2:rgba(160,180,255,.26);
+  --text:#e9ecff; --muted:#9aa3c7; --cyan:#5ce1ff; --violet:#9b7bff; --pink:#ff5cc8;
+  --glass:rgba(16,19,38,.55);
+  --font:'Space Grotesk',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+html[lang="ar"]{ --font:'Cairo',system-ui,sans-serif; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+::selection{background:var(--violet);color:#fff}
+#bg{position:fixed;inset:0;z-index:0;display:block;width:100%;height:100%}
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%,transparent 40%,rgba(2,3,8,.85) 100%)}
+.glow-cursor{position:fixed;width:520px;height:520px;border-radius:50%;pointer-events:none;z-index:1;
+  background:radial-gradient(circle,rgba(92,225,255,.10),rgba(155,123,255,.06) 40%,transparent 70%);transform:translate(-50%,-50%);transition:opacity .3s}
+main,header,footer{position:relative;z-index:2}
+
+/* NAV */
+header{position:fixed;top:0;inset-inline:0;z-index:20;padding:18px clamp(16px,4vw,48px)}
+.nav{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:10px 12px 10px 20px;border:1px solid var(--line);border-radius:999px;background:rgba(8,10,22,.55);backdrop-filter:blur(14px)}
+html[dir="rtl"] .nav{padding:10px 20px 10px 12px}
+.logo{font-weight:700;letter-spacing:.02em;text-decoration:none;display:flex;align-items:center;gap:10px;font-size:15px}
+.logo .mark{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-family:var(--mono);font-size:13px;
+  background:linear-gradient(135deg,var(--cyan),var(--violet));color:#05060c;font-weight:700}
+.links{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.links a{display:block;text-decoration:none;color:var(--muted);font-size:14px;padding:10px 14px;border-radius:999px;transition:.25s}
+.links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
+.nav-actions{display:flex;gap:8px;align-items:center}
+.lang{font:600 13px var(--mono);color:var(--text);background:transparent;border:1px solid var(--line2);border-radius:999px;
+  min-height:40px;padding:0 14px;cursor:pointer;transition:.25s}
+.lang:hover{border-color:var(--cyan);color:var(--cyan)}
+.menu-btn{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line2);background:transparent;color:var(--text);cursor:pointer}
+@media (max-width:880px){
+  .links{position:absolute;top:76px;inset-inline:16px;flex-direction:column;padding:10px;border:1px solid var(--line);border-radius:22px;
+    background:rgba(8,10,22,.92);backdrop-filter:blur(14px);display:none}
+  .links.open{display:flex}
+  .links a{padding:14px 16px;font-size:16px}
+  .menu-btn{display:grid;place-items:center}
+}
+
+/* COMMON */
+section{padding:clamp(90px,12vw,150px) clamp(18px,5vw,48px)}
+.wrap{max-width:1240px;margin:0 auto}
+.eyebrow{font:500 12px var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);display:inline-flex;align-items:center;gap:10px}
+html[lang="ar"] .eyebrow{letter-spacing:.04em;font-family:var(--font);font-size:14px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+h2.title{font-size:clamp(36px,5.6vw,72px);line-height:1.02;margin:16px 0 0;letter-spacing:-.03em;font-weight:700}
+html[lang="ar"] h2.title{letter-spacing:0;line-height:1.25}
+.grad{background:linear-gradient(100deg,var(--cyan),var(--violet) 55%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;font:600 15px var(--font);
+  text-decoration:none;cursor:pointer;border:1px solid var(--line2);color:var(--text);background:rgba(255,255,255,.03);transition:transform .25s,border-color .25s,background .25s,box-shadow .25s}
+.btn:hover{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(92,225,255,.08)}
+.btn.primary{background:linear-gradient(120deg,var(--cyan),var(--violet));color:#05060c;border:0;box-shadow:0 10px 40px -10px rgba(92,225,255,.6)}
+.btn.primary:hover{box-shadow:0 14px 50px -8px rgba(155,123,255,.8)}
+.btn svg{width:18px;height:18px}
+html[dir="rtl"] .flip{transform:scaleX(-1)}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:140px}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .9fr;gap:clamp(30px,5vw,80px);align-items:center;width:100%}
+@media (max-width:960px){.hero .wrap{grid-template-columns:1fr}.portal{order:-1;max-width:340px;margin-inline:auto}}
+.status{display:inline-flex;align-items:center;gap:10px;font:500 13px var(--mono);color:var(--muted);padding:8px 14px;border:1px solid var(--line);border-radius:999px;background:var(--glass)}
+html[lang="ar"] .status{font-family:var(--font)}
+.status i{width:8px;height:8px;border-radius:50%;background:#3dffa2;box-shadow:0 0 12px #3dffa2;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.hero h1{font-size:clamp(46px,8vw,112px);line-height:.95;letter-spacing:-.045em;margin:26px 0 0;font-weight:700}
+html[lang="ar"] .hero h1{letter-spacing:0;line-height:1.15;font-size:clamp(44px,7.4vw,100px)}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line span{display:inline-block;transform:translateY(110%);animation:rise 1.1s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 .line:nth-child(2) span{animation-delay:.12s}
+@keyframes rise{to{transform:none}}
+.role{margin-top:22px;font:500 clamp(15px,1.6vw,18px) var(--mono);color:var(--muted);min-height:1.6em}
+html[lang="ar"] .role{font-family:var(--font)}
+.role b{color:var(--cyan);font-weight:500}
+.caret{display:inline-block;width:9px;height:1.1em;background:var(--cyan);vertical-align:-3px;margin-inline-start:4px;animation:pulse 1s steps(1) infinite}
+.hero p.lead{max-width:560px;color:var(--muted);font-size:clamp(16px,1.4vw,18px);line-height:1.75;margin:22px 0 34px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+
+.portal{position:relative;aspect-ratio:1/1.1;width:100%;perspective:1000px}
+.portal-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .2s ease-out}
+.orbit{position:absolute;inset:-4%;border-radius:50%;border:1px solid var(--line2);transform-style:preserve-3d}
+.orbit.o1{transform:rotateX(72deg) rotateZ(0);animation:spin 18s linear infinite}
+.orbit.o2{inset:4%;transform:rotateY(70deg);border-color:rgba(155,123,255,.35);animation:spin2 24s linear infinite}
+.orbit::after{content:"";position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:var(--cyan);box-shadow:0 0 18px var(--cyan)}
+.orbit.o2::after{background:var(--pink);box-shadow:0 0 18px var(--pink)}
+@keyframes spin{to{transform:rotateX(72deg) rotateZ(360deg)}}
+@keyframes spin2{to{transform:rotateY(70deg) rotateZ(360deg)}}
+.photo{position:absolute;inset:12% 14%;border-radius:46% 46% 30px 30px;overflow:hidden;transform:translateZ(60px);
+  border:1px solid var(--line2);box-shadow:0 30px 80px -20px rgba(92,225,255,.35),0 0 0 8px rgba(155,123,255,.06)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:saturate(.9) contrast(1.05)}
+.photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(4,5,11,.85)),linear-gradient(130deg,rgba(92,225,255,.18),transparent 40%,rgba(155,123,255,.25));mix-blend-mode:normal}
+.chip{position:absolute;transform:translateZ(110px);padding:10px 14px;border-radius:14px;background:rgba(10,12,26,.8);border:1px solid var(--line2);
+  backdrop-filter:blur(10px);font:500 13px var(--mono);display:flex;align-items:center;gap:8px;white-space:nowrap}
+.chip .d{width:8px;height:8px;border-radius:2px}
+.chip.c1{top:14%;inset-inline-start:-2%}.chip.c2{bottom:20%;inset-inline-end:-4%}.chip.c3{bottom:4%;inset-inline-start:8%}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font:500 11px var(--mono);letter-spacing:.3em;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
+.scroll-hint::after{content:"";width:1px;height:46px;background:linear-gradient(var(--cyan),transparent);animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* MARQUEE */
+.marquee{border-block:1px solid var(--line);padding:22px 0;overflow:hidden;background:rgba(8,10,22,.5);position:relative;z-index:2}
+.marquee .track{display:flex;gap:56px;width:max-content;animation:mq 30s linear infinite}
+.marquee span{font-size:clamp(22px,3vw,34px);font-weight:600;color:transparent;-webkit-text-stroke:1px rgba(200,210,255,.45);white-space:nowrap;display:flex;align-items:center;gap:56px}
+.marquee span::after{content:"✦";-webkit-text-stroke:0;color:var(--cyan);font-size:.6em}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px);margin-top:50px}
+@media (max-width:880px){.about-grid{grid-template-columns:1fr}}
+.about-text p{color:var(--muted);font-size:clamp(16px,1.35vw,18px);line-height:1.85;margin:0 0 18px}
+.about-text p strong{color:var(--text);font-weight:600}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{position:relative;padding:24px;border-radius:22px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px);overflow:hidden;transform-style:preserve-3d;transition:border-color .3s}
+.card:hover{border-color:var(--line2)}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(92,225,255,.12),transparent 50%);opacity:0;transition:.3s}
+.card:hover::before{opacity:1}
+.card .num{font-size:clamp(40px,4.5vw,56px);font-weight:700;letter-spacing:-.04em;line-height:1}
+.card .lbl{color:var(--muted);font-size:14px;margin-top:8px;line-height:1.5}
+.card.wide{grid-column:1/-1;display:flex;gap:18px;align-items:center}
+.card .ico{flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(92,225,255,.18),rgba(155,123,255,.18));border:1px solid var(--line2)}
+.card .ico svg{width:24px;height:24px;stroke:var(--cyan)}
+.card h4{margin:0 0 4px;font-size:17px}
+
+/* SKILLS – 3D sphere */
+.skills-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;margin-top:40px}
+@media (max-width:960px){.skills-wrap{grid-template-columns:1fr}}
+.sphere{position:relative;height:clamp(340px,42vw,520px);perspective:900px;cursor:grab;touch-action:pan-y;user-select:none}
+.sphere:active{cursor:grabbing}
+.sphere .tag{position:absolute;left:50%;top:50%;font-weight:600;white-space:nowrap;will-change:transform,opacity;
+  padding:8px 14px;border-radius:999px;border:1px solid var(--line2);background:rgba(10,12,26,.7);font-size:15px}
+.sphere .core{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,rgba(92,225,255,.6),rgba(155,123,255,.25) 50%,transparent 70%);filter:blur(8px)}
+.skill-list{display:grid;gap:12px}
+.skill{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:18px;border:1px solid var(--line);background:var(--glass);transition:.3s}
+.skill:hover{border-color:var(--line2);transform:translateX(6px)}
+html[dir="rtl"] .skill:hover{transform:translateX(-6px)}
+.skill .k{font:500 12px var(--mono);color:var(--cyan);width:34px}
+.skill .n{font-weight:600;font-size:17px}
+.skill .s{color:var(--muted);font-size:14px;margin-inline-start:auto;text-align:end}
+
+/* PROJECTS – 3D ring */
+.projects{overflow:hidden}
+.proj-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.ring-ctrl{display:flex;gap:10px}
+.ring-ctrl button{width:52px;height:52px;border-radius:50%;border:1px solid var(--line2);background:var(--glass);color:var(--text);cursor:pointer;display:grid;place-items:center;transition:.25s}
+.ring-ctrl button:hover{border-color:var(--cyan);color:var(--cyan)}
+.ring-ctrl svg{width:20px;height:20px}
+.stage{position:relative;height:clamp(420px,46vw,540px);perspective:1600px;margin-top:40px;touch-action:pan-y;cursor:grab;user-select:none}
+.stage:active{cursor:grabbing}
+.ring{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.ring.dragging{transition:none}
+.pcard{position:absolute;width:var(--cw);height:calc(var(--cw)*.72);left:calc(var(--cw)/-2);top:calc(var(--cw)*-.36);
+  border-radius:20px;overflow:hidden;border:1px solid var(--line2);background:#0b0d1c;backface-visibility:hidden;
+  transition:opacity .6s,filter .6s,box-shadow .6s;cursor:pointer}
+.pcard.active{box-shadow:0 40px 120px -30px var(--accent),0 0 0 1px var(--accent)}
+.pcard:not(.active){filter:brightness(.55) saturate(.7)}
+.pcard .bar{height:34px;display:flex;align-items:center;gap:6px;padding:0 14px;background:rgba(255,255,255,.04);border-bottom:1px solid var(--line)}
+.pcard .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.18)}
+.pcard .bar em{margin-inline-start:12px;font:400 11px var(--mono);font-style:normal;color:var(--muted);padding:3px 10px;border-radius:6px;background:rgba(255,255,255,.05)}
+.pcard .art{position:absolute;inset:34px 0 0;overflow:hidden}
+.pcard .art img.shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform 6s ease}
+.pcard.active:hover .art img.shot{transform:scale(1.04)}
+.pcard .art::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(5,6,14,.55) 62%,rgba(5,6,14,.96));pointer-events:none}
+.pcard .art svg.overlay{position:absolute;inset:0;width:100%;height:100%;z-index:1}
+.pcard .meta{position:absolute;inset-inline:22px;bottom:20px;z-index:2}
+.pcard .meta .t{font-size:clamp(24px,2.6vw,34px);font-weight:700;letter-spacing:-.02em}
+.pcard .meta .st{font:500 12px var(--mono);color:var(--muted);margin-top:6px;letter-spacing:.08em}
+.spot{position:absolute;top:50px;inset-inline-end:16px;z-index:3;font:600 11px var(--mono);letter-spacing:.12em;padding:7px 11px;border-radius:999px;
+  background:linear-gradient(120deg,#ffd36b,var(--pink));color:#14060f;display:flex;align-items:center;gap:6px;animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.detail{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;margin-top:20px;padding:30px;border-radius:26px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(12px);min-height:220px}
+@media (max-width:880px){.detail{grid-template-columns:1fr}}
+.detail .idx{font:500 12px var(--mono);color:var(--muted);letter-spacing:.2em}
+.detail h3{font-size:clamp(28px,3.4vw,42px);margin:10px 0 12px;letter-spacing:-.02em}
+.detail p{color:var(--muted);line-height:1.8;margin:0;font-size:16px}
+.detail ul{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:10px}
+.detail li{display:flex;gap:10px;color:var(--text);font-size:15px;line-height:1.6}
+.detail li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:2px;background:var(--accent,var(--cyan));transform:rotate(45deg)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.tags span{font:500 12px var(--mono);padding:7px 12px;border-radius:999px;border:1px solid var(--line2);color:var(--text)}
+.detail .fade{animation:fadein .6s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}}
+.dots{display:flex;gap:8px;justify-content:center;margin-top:20px}
+.dots button{width:44px;height:44px;border:0;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
+.dots button i{display:block;width:8px;height:8px;border-radius:99px;background:var(--line2);transition:.3s}
+.dots button.on i{width:28px;background:var(--cyan)}
+
+/* TRY-ON demo glasses in Klassiq art */
+.tryon-face{animation:scan 3.2s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* EXPERIENCE */
+.timeline{position:relative;margin-top:56px;display:grid;gap:22px}
+.timeline::before{content:"";position:absolute;inset-inline-start:23px;top:10px;bottom:10px;width:1px;background:linear-gradient(var(--cyan),var(--violet),transparent)}
+.job{position:relative;padding-inline-start:72px}
+.job .node{position:absolute;inset-inline-start:12px;top:30px;width:23px;height:23px;border-radius:50%;background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 20px rgba(92,225,255,.6)}
+.job .node::after{content:"";position:absolute;inset:4px;border-radius:50%;background:var(--cyan)}
+.job.past .node{border-color:var(--violet);box-shadow:0 0 20px rgba(155,123,255,.5)}
+.job.past .node::after{background:var(--violet)}
+.job .box{padding:28px;border-radius:24px;border:1px solid var(--line);background:var(--glass);backdrop-filter:blur(10px)}
+.job .top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 20px;align-items:baseline}
+.job h3{margin:0;font-size:clamp(22px,2.4vw,28px)}
+.job .co{color:var(--cyan);font-weight:600}
+.job.past .co{color:var(--violet)}
+.job .when{font:500 13px var(--mono);color:var(--muted);padding:6px 12px;border-radius:999px;border:1px solid var(--line)}
+.job ul{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px}
+@media (max-width:760px){.job ul{grid-template-columns:1fr}.job{padding-inline-start:52px}.timeline::before{inset-inline-start:13px}.job .node{inset-inline-start:2px}}
+.job li{color:var(--muted);font-size:15px;line-height:1.65;display:flex;gap:10px}
+.job li::before{content:"→";color:var(--cyan);flex:none;font-family:var(--mono)}
+html[dir="rtl"] .job li::before{content:"←"}
+.job.past li::before{color:var(--violet)}
+.edu{margin-top:22px}
+
+/* CONTACT */
+.contact{text-align:center}
+.contact h2.title{font-size:clamp(44px,9vw,130px);line-height:.95}
+html[lang="ar"] .contact h2.title{line-height:1.2}
+.contact .lead{color:var(--muted);max-width:560px;margin:24px auto 40px;line-height:1.8;font-size:17px}
+.contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:980px;margin:0 auto}
+@media (max-width:760px){.contact-grid{grid-template-columns:1fr}}
+.cbox{display:flex;flex-direction:column;align-items:center;gap:10px;padding:30px 20px;border-radius:24px;border:1px solid var(--line);background:var(--glass);text-decoration:none;transition:.3s;position:relative;overflow:hidden}
+.cbox:hover{border-color:var(--cyan);transform:translateY(-6px)}
+.cbox .ico{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(92,225,255,.2),rgba(155,123,255,.2));border:1px solid var(--line2)}
+.cbox .ico svg{width:26px;height:26px}
+.cbox .k{font:500 12px var(--mono);color:var(--muted);letter-spacing:.2em;text-transform:uppercase}
+html[lang="ar"] .cbox .k{letter-spacing:0;font-family:var(--font);font-size:14px}
+.cbox .v{font-weight:600;font-size:16px;direction:ltr;word-break:break-all}
+.copy{font:500 12px var(--mono);color:var(--cyan);background:transparent;border:1px solid var(--line2);border-radius:999px;min-height:36px;padding:0 14px;cursor:pointer}
+footer{padding:40px clamp(18px,5vw,48px);border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,30px);opacity:0;z-index:50;padding:14px 22px;border-radius:999px;
+  background:rgba(12,14,30,.95);border:1px solid var(--line2);font-size:15px;transition:.4s;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.loader{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity .8s,visibility .8s}
+.loader.done{opacity:0;visibility:hidden}
+.loader .ld{font:500 13px var(--mono);color:var(--muted);letter-spacing:.3em;display:flex;flex-direction:column;align-items:center;gap:18px}
+.loader .ring2{width:64px;height:64px;border-radius:50%;border:2px solid var(--line2);border-top-color:var(--cyan);animation:spin3 1s linear infinite}
+@keyframes spin3{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}}
+</style>
+</head>
+<body>
+<div class="loader" id="loader"><div class="ld"><div class="ring2"></div>INITIALIZING</div></div>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="noise"></div><div class="vignette"></div>
+<div class="glow-cursor" id="glow"></div>
+
+<header>
+  <nav class="nav" aria-label="Main">
+    <a class="logo" href="#top"><span class="mark">MH</span><span>Mahmoud.dev</span></a>
+    <ul class="links" id="links">
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+      <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+      <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="lang" id="langBtn" type="button" aria-label="Switch language">عربي</button>
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+    </div>
+  </nav>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="status"><i></i><span data-i18n="status">Available for new projects</span></span>
+      <h1>
+        <span class="line"><span data-i18n="h1a">Mahmoud</span></span>
+        <span class="line"><span class="grad" data-i18n="h1b">Hussien Marof</span></span>
+      </h1>
+      <div class="role"><span data-i18n="role_pre">&gt; Front-End Developer //</span> <b id="typed"></b><span class="caret"></span></div>
+      <p class="lead" data-i18n="lead">I build responsive, user-friendly websites and web apps — turning ideas and designs into fast, clean digital experiences with React.js, WordPress and Shopify.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projects"><span data-i18n="cta_projects">Explore projects</span>
+          <svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn" href="#" id="cvBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i18n="cta_cv">Download CV</span></a>
+      </div>
+    </div>
+    <div class="portal" id="portal">
+      <div class="portal-inner" id="portalInner">
+        <div class="orbit o1"></div><div class="orbit o2"></div>
+        <div class="photo"><img src="assets/me.jpg" alt="Mahmoud Hussien Marof"></div>
+        <div class="chip c1"><span class="d" style="background:var(--cyan)"></span>React.js</div>
+        <div class="chip c2"><span class="d" style="background:var(--violet)"></span>WordPress</div>
+        <div class="chip c3"><span class="d" style="background:var(--pink)"></span>Shopify</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="mq"></div></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <span class="eyebrow reveal" data-i18n="ab_eyebrow">01 — About me</span>
+    <h2 class="title reveal" data-i18n-html="ab_title">Turning ideas into <span class="grad">digital experiences</span>.</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p data-i18n-html="ab_p1">I'm a <strong>Web Developer at ANMAT</strong>, specializing in WordPress and Front-End development. I focus on building, developing and optimizing responsive, user-friendly websites and web applications that align with business goals and deliver seamless user experiences.</p>
+        <p data-i18n-html="ab_p2">I enjoy working on modern web solutions, translating ideas and designs into functional digital experiences, and collaborating with teams to deliver high-quality results. I'm passionate about continuous learning and exploring emerging technologies.</p>
+        <p data-i18n-html="ab_p3">My goal: <strong>impactful digital experiences through clean, efficient and scalable web solutions.</strong></p>
+      </div>
+      <div class="cards reveal">
+        <div class="card tilt"><div class="num grad">5</div><div class="lbl" data-i18n="st1">Live projects showcased here</div></div>
+        <div class="card tilt"><div class="num grad">2</div><div class="lbl" data-i18n="st2">Companies — ANMAT & QEEMA TECH</div></div>
+        <div class="card tilt"><div class="num grad">3</div><div class="lbl" data-i18n="st3">Platforms — React, WordPress, Shopify</div></div>
+        <div class="card tilt"><div class="num grad">AR/EN</div><div class="lbl" data-i18n="st4">Bilingual sites, RTL & LTR</div></div>
+        <div class="card wide tilt">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg></div>
+          <div><h4 data-i18n="edu_t">Associate's Degree in Computer Science</h4><div class="lbl" data-i18n="edu_s" style="margin:0">El Shorouk Academy</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <span class="eyebrow reveal" data-i18n="sk_eyebrow">02 — Tech universe</span>
+    <h2 class="title reveal" data-i18n-html="sk_title">The tools I <span class="grad">orbit</span> around.</h2>
+    <div class="skills-wrap">
+      <div class="sphere reveal" id="sphere" aria-label="Skills sphere — drag to rotate"><div class="core"></div></div>
+      <div class="skill-list reveal" id="skillList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="projects">
+  <div class="wrap">
+    <div class="proj-head">
+      <div>
+        <span class="eyebrow reveal" data-i18n="pr_eyebrow">03 — Selected work</span>
+        <h2 class="title reveal" data-i18n-html="pr_title">Projects in <span class="grad">3D space</span>.</h2>
+      </div>
+      <div class="ring-ctrl reveal">
+        <button type="button" id="prevBtn" aria-label="Previous project"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button type="button" id="nextBtn" aria-label="Next project"><svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="stage" id="stage" dir="ltr"><div class="ring" id="ring"></div></div>
+    <div class="dots" id="dots"></div>
+    <div class="detail" id="detail"></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <span class="eyebrow reveal" data-i18n="ex_eyebrow">04 — Experience</span>
+    <h2 class="title reveal" data-i18n-html="ex_title">Where I've <span class="grad">built</span>.</h2>
+    <div class="timeline">
+      <div class="job reveal">
+        <span class="node"></span>
+        <div class="box">
+          <div class="top">
+            <h3><span class="co">ANMAT (PAS)</span> · <span data-i18n="j1_role">Web Developer / Project Coordinator</span></h3>
+            <span class="when" data-i18n="j1_when">Cairo · Aug 2025 — Now</span>
+          </div>
+          <ul id="j1"></ul>
+        </div>
+      </div>
+      <div class="job past reveal">
+        <span class="node"></span>
+        <div class="box">
+          <div class="top">
+            <h3><span class="co">QEEMA TECH</span> · <span data-i18n="j2_role">WordPress Developer</span></h3>
+            <span class="when" data-i18n="j2_when">Cairo · Aug 2021 — Nov 2022</span>
+          </div>
+          <ul id="j2"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <span class="eyebrow reveal" data-i18n="ct_eyebrow">05 — Contact</span>
+    <h2 class="title reveal" data-i18n-html="ct_title">Let's build <br><span class="grad">something wild.</span></h2>
+    <p class="lead reveal" data-i18n="ct_lead">Have a project, an idea or an opportunity? My inbox and WhatsApp are open.</p>
+    <div class="contact-grid reveal">
+      <a class="cbox" href="https://wa.me/201157678397" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#3dffa2" stroke-width="1.8"><path d="M4 20l1.4-4A8 8 0 1 1 8 18.6z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 .8a4 4 0 0 1-2-2l.8-1-1-2z"/></svg></span>
+        <span class="k">WhatsApp</span><span class="v">+20 115 767 8397</span>
+      </a>
+      <div class="cbox">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#5ce1ff" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></span>
+        <span class="k" data-i18n="email">Email</span><span class="v">Mahmoudhussien200111@gmail.com</span>
+        <button class="copy" type="button" id="copyMail" data-i18n="copy">Copy email</button>
+      </div>
+      <a class="cbox" href="https://www.linkedin.com/in/mahmoud-hussien-93a1a723a" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#9b7bff" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg></span>
+        <span class="k">LinkedIn</span><span class="v">in/mahmoud-hussien</span>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Mahmoud Hussien Marof</span><span data-i18n="foot">Crafted in Cairo with code & curiosity.</span></div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ================= DATA ================= */
+const I18N = {
+en:{
+ nav_about:"About",nav_skills:"Skills",nav_projects:"Projects",nav_exp:"Experience",nav_contact:"Contact",
+ status:"Available for new projects",h1a:"Mahmoud",h1b:"Hussien Marof",role_pre:"> Front-End Developer //",
+ lead:"I build responsive, user-friendly websites and web apps — turning ideas and designs into fast, clean digital experiences with React.js, WordPress and Shopify.",
+ cta_projects:"Explore projects",cta_cv:"Download CV",
+ ab_eyebrow:"01 — About me",ab_title:'Turning ideas into <span class="grad">digital experiences</span>.',
+ ab_p1:"I'm a <strong>Web Developer at ANMAT</strong>, specializing in WordPress and Front-End development. I focus on building, developing and optimizing responsive, user-friendly websites and web applications that align with business goals and deliver seamless user experiences.",
+ ab_p2:"I enjoy working on modern web solutions, translating ideas and designs into functional digital experiences, and collaborating with teams to deliver high-quality results. I'm passionate about continuous learning and exploring emerging technologies.",
+ ab_p3:"My goal: <strong>impactful digital experiences through clean, efficient and scalable web solutions.</strong>",
+ st1:"Live projects showcased here",st2:"Companies — ANMAT & QEEMA TECH",st3:"Platforms — React, WordPress, Shopify",st4:"Bilingual sites, RTL & LTR",
+ edu_t:"Associate's Degree in Computer Science",edu_s:"El Shorouk Academy",
+ sk_eyebrow:"02 — Tech universe",sk_title:'The tools I <span class="grad">orbit</span> around.',
+ pr_eyebrow:"03 — Selected work",pr_title:'Projects in <span class="grad">3D space</span>.',
+ ex_eyebrow:"04 — Experience",ex_title:'Where I\'ve <span class="grad">built</span>.',
+ j1_role:"Web Developer / Project Coordinator",j1_when:"Cairo · Aug 2025 — Now",
+ j2_role:"WordPress Developer",j2_when:"Cairo · Aug 2021 — Nov 2022",
+ ct_eyebrow:"05 — Contact",ct_title:'Let\'s build <br><span class="grad">something wild.</span>',
+ ct_lead:"Have a project, an idea or an opportunity? My inbox and WhatsApp are open.",
+ email:"Email",copy:"Copy email",copied:"Email copied ✓",cv_soon:"CV is on its way — coming soon.",
+ foot:"Crafted in Cairo with code & curiosity.",visit:"Visit live site",stack:"Stack",whatIDid:"What I did",spot:"SPOTLIGHT",
+ typed:["React.js Developer","WordPress Expert","Shopify Builder","AI-Powered Workflow"],
+ marquee:["React.js","WordPress","Shopify","JavaScript","Elementor","HTML5","CSS3","SharePoint","Generative AI"],
+ j1:["Developed and maintained dynamic websites using WordPress, SharePoint and modern front-end technologies.","Built responsive React.js web apps with reusable components and scalable architecture.","Customized WordPress themes, plugins and business solutions per project requirements.","Shopify store customization — theme modifications, product pages and responsive e-commerce interfaces.","Used AI-powered tools to accelerate coding, troubleshoot issues and automate repetitive tasks.","Coordinated tasks through the internal Task Flow system — assignment, tracking and delivery follow-up.","Collaborated with cross-functional teams to deliver solutions aligned with business and client needs.","Built E-commerce, LMS and company-profile websites, and provided technical support to internal teams."],
+ j2:["Developed and maintained responsive business websites using WordPress CMS.","Customized WordPress themes, plugins and functionality based on client requirements.","Built e-commerce stores, LMS platforms and corporate websites.","Implemented responsive front-end interfaces with HTML, CSS and JavaScript.","Managed website databases, hosting environments and basic server-side configurations.","Handled testing, troubleshooting, performance optimization — and trained clients on WordPress dashboards."],
+ skills:[["React.js","Components · SPA · Hooks"],["WordPress","Themes · Plugins · Custom builds"],["Elementor","Pixel-tuned page building"],["Shopify","Themes · Product pages · E-commerce"],["HTML / CSS / JS","Responsive, accessible front-end"],["Generative AI","AI-accelerated development"]]
+},
+ar:{
+ nav_about:"نبذة",nav_skills:"المهارات",nav_projects:"المشاريع",nav_exp:"الخبرات",nav_contact:"تواصل",
+ status:"متاح لمشاريع جديدة",h1a:"محمود",h1b:"حسين معروف",role_pre:"< مطوّر واجهات أمامية //",
+ lead:"أبني مواقع وتطبيقات ويب متجاوبة وسهلة الاستخدام، وأحوّل الأفكار والتصاميم لتجارب رقمية سريعة ونظيفة باستخدام React.js و WordPress و Shopify.",
+ cta_projects:"استعرض المشاريع",cta_cv:"تحميل السيرة الذاتية",
+ ab_eyebrow:"01 — عنّي",ab_title:'أحوّل الأفكار إلى <span class="grad">تجارب رقمية</span>.',
+ ab_p1:"أنا <strong>مطوّر ويب في شركة أنمات (ANMAT)</strong>، متخصص في تطوير WordPress والواجهات الأمامية. أركّز على بناء وتطوير وتحسين مواقع وتطبيقات ويب متجاوبة وسهلة الاستخدام، تخدم أهداف العمل وتقدّم تجربة مستخدم سلسة.",
+ ab_p2:"أستمتع بالعمل على حلول الويب الحديثة، وتحويل الأفكار والتصاميم إلى تجارب رقمية فعّالة، والتعاون مع الفرق لتقديم نتائج عالية الجودة. شغوف بالتعلّم المستمر واستكشاف التقنيات الناشئة.",
+ ab_p3:"هدفي: <strong>صناعة تجارب رقمية مؤثرة من خلال حلول ويب نظيفة وفعّالة وقابلة للتوسّع.</strong>",
+ st1:"مشاريع حيّة معروضة هنا",st2:"شركات — أنمات و QEEMA TECH",st3:"منصات — React و WordPress و Shopify",st4:"مواقع ثنائية اللغة RTL و LTR",
+ edu_t:"دبلوم (Associate) في علوم الحاسب",edu_s:"أكاديمية الشروق",
+ sk_eyebrow:"02 — عالمي التقني",sk_title:'الأدوات التي <span class="grad">أدور</span> حولها.',
+ pr_eyebrow:"03 — أعمال مختارة",pr_title:'مشاريعي في <span class="grad">فضاء ثلاثي الأبعاد</span>.',
+ ex_eyebrow:"04 — الخبرات",ex_title:'أين <span class="grad">بنيت</span>.',
+ j1_role:"مطوّر ويب / منسّق مشاريع",j1_when:"القاهرة · أغسطس 2025 — الآن",
+ j2_role:"مطوّر WordPress",j2_when:"القاهرة · أغسطس 2021 — نوفمبر 2022",
+ ct_eyebrow:"05 — تواصل",ct_title:'يلا نبني <br><span class="grad">حاجة مختلفة.</span>',
+ ct_lead:"عندك مشروع أو فكرة أو فرصة؟ الإيميل والواتساب مفتوحين.",
+ email:"البريد الإلكتروني",copy:"نسخ الإيميل",copied:"تم نسخ الإيميل ✓",cv_soon:"السيرة الذاتية قريباً.",
+ foot:"صُنع في القاهرة بالكود والفضول.",visit:"زيارة الموقع",stack:"التقنيات",whatIDid:"ما قمت به",spot:"مميّز",
+ typed:["مطوّر React.js","خبير WordPress","مطوّر متاجر Shopify","سير عمل بالذكاء الاصطناعي"],
+ marquee:["React.js","WordPress","Shopify","JavaScript","Elementor","HTML5","CSS3","SharePoint","Generative AI"],
+ j1:["تطوير وصيانة مواقع ديناميكية باستخدام WordPress و SharePoint وتقنيات الواجهات الحديثة.","بناء تطبيقات ويب متجاوبة بـ React.js بمكوّنات قابلة لإعادة الاستخدام وبنية قابلة للتوسّع.","تخصيص قوالب وإضافات WordPress وحلول أعمال حسب متطلبات كل مشروع.","تخصيص متاجر Shopify — تعديل القوالب وصفحات المنتجات وواجهات تجارة إلكترونية متجاوبة.","استخدام أدوات الذكاء الاصطناعي لتسريع البرمجة وحل المشكلات وأتمتة المهام المتكررة.","تنسيق المهام عبر نظام Task Flow الداخلي — التوزيع والمتابعة والتسليم.","التعاون مع فرق متعددة التخصصات لتقديم حلول تخدم متطلبات العمل والعملاء.","بناء متاجر إلكترونية ومنصات تعليمية ومواقع شركات، وتقديم الدعم الفني للفرق الداخلية."],
+ j2:["تطوير وصيانة مواقع أعمال متجاوبة باستخدام WordPress.","تخصيص قوالب وإضافات ووظائف WordPress حسب متطلبات العملاء.","بناء متاجر إلكترونية ومنصات تعليمية (LMS) ومواقع شركات.","تنفيذ واجهات أمامية متجاوبة بـ HTML و CSS و JavaScript.","إدارة قواعد البيانات وبيئات الاستضافة وإعدادات السيرفر الأساسية.","الاختبار وحل المشكلات وتحسين الأداء — وتدريب العملاء على لوحة تحكم WordPress."],
+ skills:[["React.js","مكوّنات · SPA · Hooks"],["WordPress","قوالب · إضافات · حلول مخصصة"],["Elementor","تصميم صفحات بدقة"],["Shopify","قوالب · صفحات منتجات · تجارة إلكترونية"],["HTML / CSS / JS","واجهات متجاوبة وسهلة الوصول"],["Generative AI","تطوير مُسرّع بالذكاء الاصطناعي"]]
+}};
+
+const PROJECTS = [
+ {id:"klassiq",name:"Klassiq",url:"https://www.klassiq.com/",domain:"klassiq.com",accent:"#ff5cc8",spot:true,
+  tags:["Shopify","Virtual Try-On","Camera AR","E-commerce","Bilingual"],
+  en:{type:"SHOPIFY · E-COMMERCE",desc:"A premium eyewear store with a virtual try-on experience: shoppers open their camera and see the sunglasses on their own face in real time before they buy.",
+      did:["Built a camera-based virtual try-on that simulates the glasses on the customer's face","Shopify theme customization and conversion-focused product pages","Responsive, bilingual (EN/AR) storefront experience"]},
+  ar:{type:"SHOPIFY · تجارة إلكترونية",desc:"متجر نظارات فاخر بتجربة قياس افتراضية: يفتح العميل الكاميرا ويشاهد النظارة على وجهه مباشرة قبل الشراء.",
+      did:["بناء تجربة قياس افتراضي بالكاميرا تحاكي النظارة على وجه العميل","تخصيص قالب Shopify وصفحات منتجات مصممة للتحويل","واجهة متجر متجاوبة وثنائية اللغة (عربي/إنجليزي)"]}},
+ {id:"mentor",name:"Mentor-Go",url:"https://www.mentor-go.com/",domain:"mentor-go.com",accent:"#5ce1ff",
+  tags:["React.js","AI","LMS","CV Builder","AR / EN"],
+  en:{type:"REACT.JS · AI PLATFORM",desc:"An AI career mentor that takes learners from learning to landing the job: personalized roadmaps from free content (720 lessons across 12 tracks), a bilingual ATS-friendly CV builder, scored mock interviews and a job finder.",
+      did:["Large-scale React.js front-end built with reusable components","Roadmap, track, CV-builder, interview-prep and jobs interfaces","Bilingual (EN/AR), responsive UI across the whole platform"]},
+  ar:{type:"REACT.JS · منصة ذكاء اصطناعي",desc:"منتور مهني بالذكاء الاصطناعي يرافق المتعلّم من التعلّم حتى الوظيفة: خطط تعلّم مخصصة من محتوى مجاني (720 درس في 12 مسار)، منشئ سيرة ذاتية ثنائي اللغة متوافق مع أنظمة ATS، مقابلات تجريبية بتقييم، وباحث وظائف.",
+      did:["واجهة React.js كبيرة مبنية بمكوّنات قابلة لإعادة الاستخدام","واجهات الخطط والمسارات ومنشئ السيرة الذاتية والمقابلات والوظائف","تصميم متجاوب وثنائي اللغة على مستوى المنصة كلها"]}},
+ {id:"anmat",name:"ANMAT",url:"https://anmat.sa/",domain:"anmat.sa",accent:"#9b7bff",
+  tags:["WordPress","Elementor","Corporate","AR / EN"],
+  en:{type:"WORDPRESS · CORPORATE",desc:"Corporate website for a Riyadh-based group working across technology, telecom, construction, manufacturing and consulting — with investor relations, media, careers, academy and support sections.",
+      did:["Built and maintain the full WordPress site","Bilingual Arabic/English structure with RTL support","Sector, product and corporate pages — responsive across devices"]},
+  ar:{type:"WORDPRESS · موقع شركة",desc:"الموقع الرسمي لمجموعة مقرّها الرياض تعمل في التقنية والاتصالات والإنشاءات والتصنيع والاستشارات — مع أقسام علاقات المستثمرين والإعلام والوظائف والأكاديمية والدعم.",
+      did:["بناء وصيانة الموقع بالكامل على WordPress","هيكل ثنائي اللغة عربي/إنجليزي مع دعم RTL","صفحات القطاعات والمنتجات والشركة — متجاوبة على كل الأجهزة"]}},
+ {id:"babel",name:"Bab El Bahr",url:"https://babelbhr.com/",domain:"babelbhr.com",accent:"#ffb35c",
+  tags:["React.js","E-commerce","Cart & Wishlist","AR / EN"],
+  en:{type:"REACT.JS · E-COMMERCE",desc:"A full bilingual online store for a Cairo sweets & baking retailer — chocolates, candy, baking ingredients and tools, decorations, fresh cakes and more, with accounts, cart, wishlist and a recipes blog.",
+      did:["React.js storefront with category browsing, bestsellers and new arrivals","Cart, wishlist, accounts, search and promo-code flows","Arabic/English with full RTL, mobile-first and responsive"]},
+  ar:{type:"REACT.JS · تجارة إلكترونية",desc:"متجر إلكتروني متكامل ثنائي اللغة لمحل حلويات ومستلزمات خَبز في القاهرة — شوكولاتة وحلويات ومكونات وأدوات خَبز وزينة وكيك طازج، مع حسابات وسلة ومفضلة ومدونة وصفات.",
+      did:["واجهة متجر React.js بتصفّح الأقسام والأكثر مبيعاً والوافد حديثاً","السلة والمفضلة والحسابات والبحث وأكواد الخصم","عربي/إنجليزي مع دعم RTL كامل، ومتجاوب يبدأ من الموبايل"]}},
+ {id:"afri",name:"Afri General",url:"https://afrigeneral.com/",domain:"afrigeneral.com",accent:"#3dffa2",
+  tags:["WordPress","WooCommerce","LG · HP · Shell"],
+  en:{type:"WORDPRESS · ELECTRONICS",desc:"Website for the authorized LG agency in Juba, South Sudan — showcasing LG appliances, HP laptops and printers, and Shell lubricants, with delivery, installation and after-sales services.",
+      did:["WordPress + shop with a multi-brand product catalog and cart","Animated hero slider and product pages for the LG range","Service center, warranty, blog & gallery and contact pages"]},
+  ar:{type:"WORDPRESS · أجهزة إلكترونية",desc:"موقع الوكيل المعتمد لـ LG في جوبا، جنوب السودان — يعرض أجهزة LG ولابتوبات وطابعات HP وزيوت Shell، مع خدمات التوصيل والتركيب وما بعد البيع.",
+      did:["WordPress مع متجر وكتالوج منتجات لعدة علامات تجارية وسلة شراء","سلايدر رئيسي متحرك وصفحات منتجات LG","صفحات مركز الصيانة والضمان والمدونة والمعرض والتواصل"]}}
+];
+
+/* Project visuals: real homepage screenshots (+ try-on overlay for Klassiq) */
+function art(p){
+ let o="";
+ if(p.id==="klassiq") o=`<svg class="overlay" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g transform="translate(110 70)"><g class="tryon-face">
+   <path d="M-48 -52 h16 M-48 -52 v16 M48 -52 h-16 M48 -52 v16 M-48 52 h16 M-48 52 v-16 M48 52 h-16 M48 52 v-16" stroke="#ff5cc8" stroke-width="2.5" fill="none"/>
+   <line x1="-50" x2="50" y1="0" y2="0" stroke="#ff5cc8" stroke-opacity=".9" stroke-width="1.5"><animate attributeName="y1" values="-50;50;-50" dur="3s" repeatCount="indefinite"/><animate attributeName="y2" values="-50;50;-50" dur="3s" repeatCount="indefinite"/></line>
+   <text x="-48" y="68" fill="#ff5cc8" font-family="monospace" font-size="9" letter-spacing="1">FACE TRACKING · LIVE</text></g></g></svg>`;
+ return `<img class="shot" src="assets/projects/${p.id}.jpg" alt="${p.name} homepage" loading="lazy">${o}`;
+}
+
+/* ================= I18N ================= */
+let lang="en";
+try{ lang=localStorage.getItem("mh_lang")||((navigator.language||"").startsWith("ar")?"ar":"en"); }catch(e){}
+const $=s=>document.querySelector(s);
+function applyLang(){
+ const d=I18N[lang];
+ document.documentElement.lang=lang; document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n; if(d[k]!=null) el.textContent=d[k];});
+ document.querySelectorAll("[data-i18n-html]").forEach(el=>{const k=el.dataset.i18nHtml; if(d[k]!=null) el.innerHTML=d[k];});
+ $("#langBtn").textContent=lang==="ar"?"EN":"عربي";
+ $("#j1").innerHTML=d.j1.map(t=>`<li>${t}</li>`).join("");
+ $("#j2").innerHTML=d.j2.map(t=>`<li>${t}</li>`).join("");
+ $("#skillList").innerHTML=d.skills.map((s,i)=>`<div class="skill"><span class="k">0${i+1}</span><span class="n">${s[0]}</span><span class="s">${s[1]}</span></div>`).join("");
+ const mq=d.marquee.concat(d.marquee).map(t=>`<span>${t}</span>`).join(""); $("#mq").innerHTML=mq;
+ document.querySelectorAll(".pcard .spot").forEach(s=>s.lastChild.textContent=" "+d.spot);
+ document.querySelectorAll(".pcard").forEach((c,i)=>c.querySelector(".st").textContent=PROJECTS[i][lang].type);
+ renderDetail(); typedIdx=0; charIdx=0; deleting=false;
+ try{localStorage.setItem("mh_lang",lang)}catch(e){}
+}
+$("#langBtn").addEventListener("click",()=>{lang=lang==="en"?"ar":"en";applyLang();});
+$("#menuBtn").addEventListener("click",()=>$("#links").classList.toggle("open"));
+document.querySelectorAll("#links a").forEach(a=>a.addEventListener("click",()=>$("#links").classList.remove("open")));
+
+/* Typed role */
+let typedIdx=0,charIdx=0,deleting=false;
+function typeLoop(){
+ const words=I18N[lang].typed, w=words[typedIdx%words.length];
+ charIdx+=deleting?-1:1; $("#typed").textContent=w.slice(0,charIdx);
+ let t=deleting?40:85;
+ if(!deleting&&charIdx>=w.length){deleting=true;t=1600}
+ else if(deleting&&charIdx<=0){deleting=false;typedIdx++;t=300}
+ setTimeout(typeLoop,t);
+}
+
+/* Toast */
+function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),2400);}
+$("#cvBtn").addEventListener("click",e=>{e.preventDefault();toast(I18N[lang].cv_soon);});
+$("#copyMail").addEventListener("click",async()=>{try{await navigator.clipboard.writeText("Mahmoudhussien200111@gmail.com");toast(I18N[lang].copied);}catch(e){toast("Mahmoudhussien200111@gmail.com");}});
+
+/* ================= PROJECT RING ================= */
+const ring=$("#ring"), stage=$("#stage"), N=PROJECTS.length, step=360/N;
+let current=0, rot=0;
+function sizeRing(){
+ const w=stage.clientWidth;
+ const cw=Math.min(520,Math.max(260,w*.46));
+ const radius=Math.round((cw/2)/Math.tan(Math.PI/N))+ (w<600?20:60);
+ stage.style.setProperty("--cw",cw+"px");
+ ring.querySelectorAll(".pcard").forEach((c,i)=>c.style.transform=`rotateY(${i*step}deg) translateZ(${radius}px)`);
+ ring.style.setProperty("--r",radius+"px"); setRing();
+}
+function setRing(){ ring.style.transform=`translateZ(calc(var(--r) * -1)) rotateY(${rot}deg)`; }
+ring.innerHTML=PROJECTS.map((p,i)=>`<div class="pcard" data-i="${i}" style="--accent:${p.accent}">
+ <div class="bar"><i></i><i></i><i></i><em>${p.domain}</em></div>
+ <div class="art">${art(p)}</div>
+ ${p.spot?`<span class="spot"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.9L22 10l-5.5 4.7L18.2 22 12 18.3 5.8 22l1.7-7.3L2 10l7.1-1.1z"/></svg> SPOTLIGHT</span>`:""}
+ <div class="meta"><div class="t">${p.name}</div><div class="st">${p.en.type}</div></div></div>`).join("");
+$("#dots").innerHTML=PROJECTS.map((p,i)=>`<button type="button" aria-label="${p.name}" data-i="${i}"><i></i></button>`).join("");
+function go(i){
+ const target=((i%N)+N)%N;
+ let diff=target-current; if(diff>N/2)diff-=N; if(diff<-N/2)diff+=N;
+ rot-=diff*step; current=target; setRing(); markActive(); renderDetail();
+}
+function markActive(){
+ ring.querySelectorAll(".pcard").forEach((c,i)=>c.classList.toggle("active",i===current));
+ document.querySelectorAll("#dots button").forEach((b,i)=>b.classList.toggle("on",i===current));
+}
+function renderDetail(){
+ const p=PROJECTS[current], d=p[lang], L=I18N[lang];
+ const det=$("#detail"); det.style.setProperty("--accent",p.accent);
+ det.innerHTML=`<div class="fade"><div class="idx">0${current+1} / 0${N} · ${d.type}</div><h3>${p.name}${p.spot?` <span style="font-size:.45em;vertical-align:middle;color:${p.accent}">★ ${L.spot}</span>`:""}</h3><p>${d.desc}</p></div>
+ <div class="fade"><div class="idx" style="margin-bottom:12px">${L.whatIDid}</div><ul>${d.did.map(x=>`<li>${x}</li>`).join("")}</ul>
+ <div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div>
+ <a class="btn primary" href="${p.url}" target="_blank" rel="noopener" style="background:linear-gradient(120deg,${p.accent},var(--violet))">${L.visit}
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg></a></div>`;
+}
+$("#nextBtn").addEventListener("click",()=>go(current+(lang==="ar"?-1:1)));
+$("#prevBtn").addEventListener("click",()=>go(current-(lang==="ar"?-1:1)));
+$("#dots").addEventListener("click",e=>{const b=e.target.closest("button");if(b)go(+b.dataset.i);});
+ring.addEventListener("click",e=>{const c=e.target.closest(".pcard");if(c&&!dragMoved)go(+c.dataset.i);});
+let dragX=null,dragStartRot=0,dragMoved=false,autoT=null;
+stage.addEventListener("pointerdown",e=>{dragX=e.clientX;dragStartRot=rot;dragMoved=false;ring.classList.add("dragging");stopAuto();});
+window.addEventListener("pointermove",e=>{if(dragX==null)return;const dx=e.clientX-dragX;if(Math.abs(dx)>6)dragMoved=true;rot=dragStartRot+dx*.25;setRing();});
+window.addEventListener("pointerup",()=>{if(dragX==null)return;dragX=null;ring.classList.remove("dragging");
+ const idx=Math.round(-rot/step); rot=-idx*step; current=((idx%N)+N)%N; setRing(); markActive(); renderDetail(); setTimeout(()=>dragMoved=false,50); startAuto();});
+function startAuto(){stopAuto();autoT=setInterval(()=>go(current+1),5200);}
+function stopAuto(){clearInterval(autoT);}
+stage.addEventListener("mouseenter",stopAuto); stage.addEventListener("mouseleave",startAuto);
+window.addEventListener("resize",sizeRing);
+
+/* ================= SKILL SPHERE ================= */
+const SK=["React.js","WordPress","JavaScript","HTML5","CSS3","Elementor","Shopify","SharePoint","Generative AI","Responsive UI","E-commerce","LMS","Git","UI/UX","RTL / LTR","Performance","Hosting","WooCommerce"];
+const sphere=$("#sphere"); const tags=[];
+SK.forEach((s,i)=>{const el=document.createElement("span");el.className="tag";el.textContent=s;sphere.appendChild(el);
+ const phi=Math.acos(-1+(2*i+1)/SK.length), th=Math.sqrt(SK.length*Math.PI)*phi;
+ tags.push({el,x:Math.cos(th)*Math.sin(phi),y:Math.sin(th)*Math.sin(phi),z:Math.cos(phi)});});
+let ax=.003, ay=.004, sdrag=null;
+sphere.addEventListener("pointerdown",e=>{sdrag={x:e.clientX,y:e.clientY};});
+window.addEventListener("pointermove",e=>{if(!sdrag)return;ay=(e.clientX-sdrag.x)*.0004;ax=-(e.clientY-sdrag.y)*.0004;sdrag={x:e.clientX,y:e.clientY};});
+window.addEventListener("pointerup",()=>sdrag=null);
+const colors=["#5ce1ff","#9b7bff","#ff5cc8","#e9ecff"];
+function sphereLoop(){
+ const R=Math.min(sphere.clientWidth,sphere.clientHeight)*.42;
+ const ca=Math.cos(ax),sa=Math.sin(ax),cb=Math.cos(ay),sb=Math.sin(ay);
+ tags.forEach((t,i)=>{let y=t.y*ca-t.z*sa, z=t.y*sa+t.z*ca; let x=t.x*cb+z*sb; z=-t.x*sb+z*cb; t.x=x;t.y=y;t.z=z;
+  const s=(z+2)/3; t.el.style.transform=`translate(-50%,-50%) translate3d(${x*R}px,${y*R}px,${z*R}px) scale(${.7+s*.5})`;
+  t.el.style.opacity=.25+s*.75; t.el.style.zIndex=Math.round(s*100); t.el.style.color=colors[i%4];});
+ if(!sdrag){ax+=(.003-ax)*.02;ay+=(.004-ay)*.02;}
+ requestAnimationFrame(sphereLoop);
+}
+
+/* ================= TILT + CURSOR ================= */
+const glow=$("#glow");
+window.addEventListener("pointermove",e=>{glow.style.left=e.clientX+"px";glow.style.top=e.clientY+"px";});
+document.querySelectorAll(".tilt").forEach(c=>{
+ c.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect();const px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+  c.style.transform=`perspective(700px) rotateX(${(.5-py)*10}deg) rotateY(${(px-.5)*12}deg)`;c.style.setProperty("--mx",px*100+"%");c.style.setProperty("--my",py*100+"%");});
+ c.addEventListener("pointerleave",()=>c.style.transform="");
+});
+const portal=$("#portalInner");
+window.addEventListener("pointermove",e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;portal.style.transform=`rotateY(${x*18}deg) rotateX(${-y*14}deg)`;});
+
+/* Reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+/* ================= THREE.JS GALAXY ================= */
+function initThree(){
+ if(!window.THREE) return;
+ const canvas=$("#bg"); let renderer;
+ try{renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});}catch(e){return;}
+ renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+ const scene=new THREE.Scene(); scene.fog=new THREE.FogExp2(0x04050b,.035);
+ const cam=new THREE.PerspectiveCamera(60,1,.1,200); cam.position.set(0,3,14);
+ const mobile=innerWidth<700;
+ // galaxy
+ const count=mobile?9000:22000, pos=new Float32Array(count*3), col=new Float32Array(count*3);
+ const cIn=new THREE.Color("#5ce1ff"), cOut=new THREE.Color("#9b7bff"), cP=new THREE.Color("#ff5cc8");
+ for(let i=0;i<count;i++){
+  const r=Math.pow(Math.random(),1.4)*14, br=(i%4)/4*Math.PI*2, sp=r*.55;
+  const rx=Math.pow(Math.random(),3)*(Math.random()<.5?1:-1)*.9, ry=Math.pow(Math.random(),3)*(Math.random()<.5?1:-1)*.5, rz=Math.pow(Math.random(),3)*(Math.random()<.5?1:-1)*.9;
+  pos[i*3]=Math.cos(br+sp)*r+rx; pos[i*3+1]=ry; pos[i*3+2]=Math.sin(br+sp)*r+rz;
+  const c=cIn.clone().lerp(cOut,r/14); if(Math.random()<.08)c.lerp(cP,.8);
+  col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;
+ }
+ const g=new THREE.BufferGeometry(); g.setAttribute("position",new THREE.BufferAttribute(pos,3)); g.setAttribute("color",new THREE.BufferAttribute(col,3));
+ const m=new THREE.PointsMaterial({size:.05,vertexColors:true,depthWrite:false,blending:THREE.AdditiveBlending,transparent:true,opacity:.95});
+ const galaxy=new THREE.Points(g,m); galaxy.position.set(4,-1.5,-6); galaxy.rotation.x=.35; scene.add(galaxy);
+ // far stars
+ const sc=mobile?1200:3000, sp2=new Float32Array(sc*3);
+ for(let i=0;i<sc*3;i++)sp2[i]=(Math.random()-.5)*120;
+ const sg=new THREE.BufferGeometry(); sg.setAttribute("position",new THREE.BufferAttribute(sp2,3));
+ const stars=new THREE.Points(sg,new THREE.PointsMaterial({size:.08,color:0xbfc8ff,transparent:true,opacity:.7,depthWrite:false})); scene.add(stars);
+ // wire objects
+ const ico=new THREE.Mesh(new THREE.IcosahedronGeometry(1.6,1),new THREE.MeshBasicMaterial({color:0x5ce1ff,wireframe:true,transparent:true,opacity:.35}));
+ ico.position.set(-7,2,-4); scene.add(ico);
+ const knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1,.28,120,12),new THREE.MeshBasicMaterial({color:0x9b7bff,wireframe:true,transparent:true,opacity:.22}));
+ knot.position.set(7,-6,-8); scene.add(knot);
+ const torus=new THREE.Mesh(new THREE.TorusGeometry(2.2,.02,8,120),new THREE.MeshBasicMaterial({color:0xff5cc8,transparent:true,opacity:.5}));
+ torus.position.set(-6,-12,-6); torus.rotation.x=1.2; scene.add(torus);
+ let mx=0,my=0,sy=0;
+ window.addEventListener("pointermove",e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5;});
+ window.addEventListener("scroll",()=>{sy=scrollY/(document.body.scrollHeight-innerHeight||1);},{passive:true});
+ function resize(){renderer.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();}
+ window.addEventListener("resize",resize); resize();
+ const clock=new THREE.Clock();
+ (function loop(){
+  const t=clock.getElapsedTime();
+  galaxy.rotation.y=t*.04+sy*2.2;
+  stars.rotation.y=t*.005;
+  ico.rotation.x=t*.25;ico.rotation.y=t*.3;
+  knot.rotation.x=t*.15;knot.rotation.y=t*.2;
+  torus.rotation.z=t*.3;
+  cam.position.x+=(mx*2.5-cam.position.x)*.04;
+  const ty=3-sy*14 - my*1.5; cam.position.y+=(ty-cam.position.y)*.05;
+  cam.position.z=14-sy*4;
+  cam.lookAt(0,cam.position.y-3,-4);
+  renderer.render(scene,cam); requestAnimationFrame(loop);
+ })();
+}
+
+/* ================= BOOT ================= */
+applyLang(); sizeRing(); markActive(); renderDetail(); typeLoop(); sphereLoop(); startAuto(); initThree();
+window.addEventListener("load",()=>setTimeout(()=>$("#loader").classList.add("done"),400));
+setTimeout(()=>$("#loader").classList.add("done"),2500);
+</script>
+</body>
+</html>
