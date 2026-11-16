@@ -297,7 +297,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       <div class="cta">
         <a class="btn primary" href="#projects"><span data-i18n="cta_projects">Explore projects</span>
           <svg class="flip" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn" href="#" id="cvBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i18n="cta_cv">Download CV</span></a>
+        <a class="btn" href="assets/Mahmoud-Hussien-Marof-CV.pdf" download="Mahmoud-Hussien-Marof-CV.pdf" id="cvBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i18n="cta_cv">Download CV</span></a>
       </div>
     </div>
     <div class="portal" id="portal">
@@ -565,7 +565,6 @@ function typeLoop(){
 
 /* Toast */
 function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),2400);}
-$("#cvBtn").addEventListener("click",e=>{e.preventDefault();toast(I18N[lang].cv_soon);});
 $("#copyMail").addEventListener("click",async()=>{try{await navigator.clipboard.writeText("Mahmoudhussien200111@gmail.com");toast(I18N[lang].copied);}catch(e){toast("Mahmoudhussien200111@gmail.com");}});
 
 /* ================= PROJECT RING ================= */
